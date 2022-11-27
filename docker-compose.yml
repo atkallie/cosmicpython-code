@@ -25,7 +25,10 @@ services:
       - /src/allocation/entrypoints/redis_eventconsumer.py
 
   api:
-    image: allocation-image
+#    image: allocation-image
+    build:
+      context: .
+      dockerfile: "Dockerfile"
     depends_on:
       - redis_pubsub
       - mailhog

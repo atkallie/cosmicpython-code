@@ -62,6 +62,15 @@ allocations_view = Table(
 
 def start_mappers():
     logger.info("Starting mappers")
+
+    # ===== [START] ADDED BY ME TO INITIALIZE TABLES =====
+    from sqlalchemy import create_engine
+    from allocation import config
+    engine = create_engine(config.get_postgres_uri())
+    engine.connect()
+    metadata.create_all(engine)
+    # ===== [END] ADDED BY ME TO INITIALIZE TABLES =====
+
     lines_mapper = mapper(model.OrderLine, order_lines)
     batches_mapper = mapper(
         model.Batch,
